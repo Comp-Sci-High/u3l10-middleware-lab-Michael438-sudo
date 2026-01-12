@@ -10,15 +10,36 @@
 // -7 sends back a 404 page for all other paths
 
 // PINK Only: Add the correct status codes to ALL route handlers
-
+const express = require("express")
+const app = express()
 const animalShelterData = {
     cats: [
         { name: "Whiskers", age: 2, shelter: "Happy Tails Shelter" },
         { name: "Mittens", age: 3, shelter: "Cozy Paws Sanctuary" },
-        { name: "Shadow", age: 1, shelter: "Happy Tails Shelter" }
-    ],
+        { name: "Shadow"
+        }, age: 1, shelter: "Happy Tails Shelter" }
+    ]
     shelters: [
         { name: "Happy Tails Shelter", location: "123 Main Street, Cityville" },
         { name: "Cozy Paws Sanctuary", location: "456 Oak Avenue, Townsburg" }
     ]
 };
+app.get("/", (req, res) => {
+    res.status(200).json(animalShelterData.shelters)
+})
+app.get("/docs", (req,res) =>{
+    res.status(200).send("<p> An animal you could adopt is" + animalShelters.cats[0].name)
+})
+
+app.get("/adopt/cat", (req, res) =>{
+    res.status(200).send("<p> an animal you could adopt is", animalShelterData.cats[0]).name
+})
+
+app.use((req, res, next) => {
+console.log(req.method, "/", req.url)
+next()
+})
+
+app.listen(3000, () =>{
+    console.log("server is running")
+})
